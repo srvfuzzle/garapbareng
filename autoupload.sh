@@ -30,8 +30,8 @@ if [ $(ls -1 /root/plots/*.plot -1 2>/dev/null | wc -l) != 0 ];
     curl -s --request GET $randcrud > $json_path
     id=$(cat $json_path | jq -cr '[.[] | select( .status == "kosong")] | .[0]._id')
     if [ $id == null ]; then
-    echo "No empty Storj on $randcrud, sleep 10 detik"
-    sleep 10
+    echo "No empty Storj on $randcrud, sleep 10 menit"
+    sleep 600
     continue ;
     else
     echo $file >> /root/plots/proses.txt
