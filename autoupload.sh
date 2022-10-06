@@ -23,7 +23,7 @@ if [ $(ls -1 /root/plots/*.plot -1 2>/dev/null | wc -l) != 0 ];
     else
     filepath="/root/plots/$file"
     echo "mulai copy file $(echo $file | rev | cut -d "-" -f1 | rev | cut -d "." -f1 | tail -c 8) $(date +%m-%d-%T)"
-    randcrud=`cat /root/listcrud.txt | shuf -n 1`
+    randcrud=`cat listcrud.txt | shuf -n 1`
     jsonfile="$(echo $file | cut -d "." -f1).json"
     mkdir -p $jsondir
     json_path="$jsondir/$jsonfile"
