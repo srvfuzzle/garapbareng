@@ -46,7 +46,7 @@ if [ $(ls -1 /root/plots/*.plot -1 2>/dev/null | wc -l) != 0 ];
     secret_key=$(cat $json_id | jq -cr ".secret_key")
     endpoint=$(cat $json_id| jq -cr ".endpoint")
     short_file=$(echo $file | rev | cut -d "-" -f1 | rev | cut -d "." -f1 | tail -c 8)
-    screen -dmS upload_$(echo $file | rev | cut -d "-" -f1 | rev | cut -d "." -f1 | tail -c 8) bash /root/upload $access_key $secret_key $endpoint $filepath $urlcrud $json_id
+    screen -dmS upload_$(echo $file | rev | cut -d "-" -f1 | rev | cut -d "." -f1 | tail -c 8) bash ./upload $access_key $secret_key $endpoint $filepath $urlcrud $json_id
     echo "Uploading file \"plot...$short_file.plot\" on Screen session upload_$short_file"
     sleep 60
     fi

@@ -3,7 +3,7 @@ contract_key=
 farmer_key=
 while :
 do
-    totalplot=$(ls -lR ~/plots/*.plot 2>/dev/null | wc -l)
+    totalplot=$(ls -lR /root/plots/*.plot 2>/dev/null | wc -l)
     core=$(lscpu | egrep '^CPU\(s\):' | awk -v FS=: '{print $2}' | tr -d '[:blank:]' )
 
         if [[ totalplot -le 2 ]]
