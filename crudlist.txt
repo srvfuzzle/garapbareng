@@ -1,1 +1,1 @@
-// insert your crudcrud endpoints here
+// insert your crudcrud endpoints list here
