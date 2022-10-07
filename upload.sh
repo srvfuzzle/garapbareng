@@ -14,11 +14,21 @@ export RCLONE_CONFIG_$(echo ${access_key^^})_ACCESS_KEY_ID="$access_key"
 export RCLONE_CONFIG_$(echo ${access_key^^})_SECRET_ACCESS_KEY="$secret_key"
 export RCLONE_CONFIG_$(echo ${access_key^^})_ENDPOINT="$endpoint"
 
+export AWS_ACCESS_KEY_ID=$access_key
+export AWS_SECRET_ACCESS_KEY=$secret_key
+endpoint=$endpoint
+mountpoint=/mount/$access_key
+mkdir -p $mountpoint
+goofys --endpoint $endpoint demo-bucket: $mountpoint
 
 rclone mkdir ${access_key^^}:demo-bucket/
-rclone move $filepath ${access_key^^}:demo-bucket/ -P
+mv $filepath /mount/$access_key
 
 cat $json_id | jq ".status |= \"isi\"" > $json_id.temp && mv $json_id.temp $json_id
 curl --location --request PUT $urlcrud --header 'Content-Type: application/json' -d @$json_id
+
+umount -l /mount/$access_key
+
+rm -rf /mount/$access_key
 
 rm -rf $json_id
